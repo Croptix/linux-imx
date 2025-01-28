@@ -1,0 +1,53 @@
+/dts-v1/;
+
+/*#include "imx8mp-evk.dts"*/
+#include "imx8mp-navq.dts"
+
+/ {
+	model = "NXP i.MX8MPlus NAVQ+ board (Croptix prototype)";
+	compatible = "croptix,imx8mp-navq-croptix", "fsl,imx8mp-navq", "fsl,imx8mp";
+
+};
+
+/* Disable UART3 & UART4 */
+
+&uart3 {
+	status = "disabled";
+};
+
+&uart4 {
+	status = "disabled";
+};
+
+/* Enable SPI1 & SPI2 */
+
+&ecspi1 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	fsl,spi-num-chipselects = <1>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart3>;
+	status = "okay";
+
+	spidev1: spi@0 {
+		reg = <0>;
+		compatible = "rohm,dh2228fv";
+		spi-max-frequency = <500000>;
+	};
+};
+
+&ecspi2 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	fsl,spi-num-chipselects = <1>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart4>;
+	cs-gpios = <&gpio5 13 GPIO_ACTIVE_LOW>;
+	status = "okay";
+
+	spidev2: spi@0 {
+		reg = <0>;
+		compatible = "rohm,dh2228fv";
+		spi-max-frequency = <500000>;
+	};
+};
