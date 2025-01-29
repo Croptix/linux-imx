@@ -48,13 +48,13 @@
 	cs-gpios = <&gpio5 13 GPIO_ACTIVE_LOW>;
 	status = "okay";
 
-	/*spidev2: spi@0 {
+	spidev2: spi@0 {
 		reg = <0>;
 		compatible = "rohm,dh2228fv";
 		spi-max-frequency = <500000>;
-	};*/
+	};
 
-    gpiom1: gpio@0 {
+    /*gpiom1: gpio@0 {
         compatible = "microchip,mcp23s17";
         #gpio-cells = <2>;
         gpio-controller;
@@ -62,7 +62,7 @@
         microchip,spi-present-mask = <0x03>;
         spi-max-frequency = <10000000>;
         #interrupt-cells = <2>;
-    };
+    };*/
 };
 
 &iomuxc {
