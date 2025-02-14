@@ -9,14 +9,30 @@
 
 };
 
-/* Disable UART3 & UART4 */
+/* Disable UART3 */
 
 &uart3 {
 	status = "disabled";
 };
 
-&uart4 {
+/* Disable I2C6 */
+&i2c6 {
 	status = "disabled";
+};
+
+/* Redirect UART4 to AUX pins */
+&uart4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart4_aux>;
+	assigned-clocks = <&clk IMX8MP_CLK_UART4>;
+	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_80M>;
+	fsl,uart-has-rtscts;
+	status = "okay";
+
+	/*gps1: gps@0 {
+		compatible = "u-blox,neo-m8"
+		frequency = <38400>; // no idea if this is the right property name
+	}*/
 };
 
 /* Enable SPI1 & SPI2 */
@@ -98,6 +114,15 @@
 	pinctrl_ecspi2_cs: ecspi2cs {
 		fsl,pins = <
 			MX8MP_IOMUXC_ECSPI2_SS0__GPIO5_IO13		0x40000
+		>;
+	};
+
+	/* Guessing from imx8mp-pinfunc.h */
+
+	pinctrl_uart4_aux: uart4auxgrp {
+		fsl,pins = <
+			MX8MP_IOMUXC_UART4_TXD__UART4_DCE_TX		0x140
+			MX8MP_IOMUXC_UART4_RXD__UART4_DCE_RX		0x140
 		>;
 	};
 };
