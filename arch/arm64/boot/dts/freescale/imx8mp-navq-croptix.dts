@@ -6,34 +6,6 @@
 / {
 	model = "NXP i.MX8MPlus NAVQ+ board (Croptix prototype)";
 	compatible = "croptix,imx8mp-navq-croptix", "fsl,imx8mp-navq", "fsl,imx8mp";
-
-	/* Define LEDs and buttons connected to GPIO expanders */
-	leds {
-		compatible = "gpio-leds";
-		status = "okay";
-		led0 {
-			label = "croptix-led-0";
-			gpios = <&gpiom 9 GPIO_ACTIVE_HIGH>;
-		};
-		led1 {
-			label = "croptix-led-1";
-			gpios = <&gpiom 17 GPIO_ACTIVE_HIGH>;
-		};
-		led2 {
-			label = "croptix-led-2";
-			gpios = <&gpiom 25 GPIO_ACTIVE_HIGH>;
-		};
-	};
-	// gpio_keys {
-	// 	compatible = "gpio-keys";
-	// 	status = "okay";
-
-	// 	button1 {
-	// 		label = "button1";
-	// 		gpios = <&gpiom 1 GPIO_ACTIVE_HIGH>;
-	// 		linux,code = <KEY_ENTER>;
-	// 	};
-	// };
 };
 
 /* Disable UART3 */
@@ -153,4 +125,34 @@
 			MX8MP_IOMUXC_UART4_RXD__UART4_DCE_RX		0x140
 		>;
 	};
+};
+
+/ {
+	/* Define LEDs and buttons connected to GPIO expanders */
+	leds {
+		compatible = "gpio-leds";
+		status = "okay";
+		led0 {
+			label = "croptix-led-0";
+			gpios = <&gpiom 9 GPIO_ACTIVE_HIGH>;
+		};
+		led1 {
+			label = "croptix-led-1";
+			gpios = <&gpiom 17 GPIO_ACTIVE_HIGH>;
+		};
+		led2 {
+			label = "croptix-led-2";
+			gpios = <&gpiom 25 GPIO_ACTIVE_HIGH>;
+		};
+	};
+	// gpio_keys {
+	// 	compatible = "gpio-keys";
+	// 	status = "okay";
+
+	// 	button1 {
+	// 		label = "button1";
+	// 		gpios = <&gpiom 1 GPIO_ACTIVE_HIGH>;
+	// 		linux,code = <KEY_ENTER>;
+	// 	};
+	// };
 };
