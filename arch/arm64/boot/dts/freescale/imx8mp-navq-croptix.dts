@@ -37,6 +37,7 @@
 
 /* Enable SPI1 & SPI2 */
 
+/* defaults to UART3; change to SPI1 */
 &ecspi1 {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -47,21 +48,21 @@
 	cs-gpios = <&gpio5 9 GPIO_ACTIVE_LOW>;
 	status = "okay";
 
-	/*spidev1: spi@0 {
-		reg = <0>;
-		compatible = "rohm,dh2228fv";
-		spi-max-frequency = <500000>;
-	};*/
-
-	gpiom1: gpio@0 {
-        compatible = "microchip,mcp23s17";
-        #gpio-cells = <2>;
-        gpio-controller;
-        reg = <0>;
-        microchip,spi-present-mask = <0x01>; /* chip address bits 0-7: this chip has all address pins set to 0 */
-        spi-max-frequency = <10000000>;
-        #interrupt-cells = <2>;
-    };
+	/* NB: The mcp23s17 driver doesn't like having two expanders on the same
+		CS line. But the mask can accept multiple chips on one node if we give
+		it two addresses via the address mask.
+	 */
+	gpiom: gpio@0 {
+		compatible = "microchip,mcp23s17";
+		#gpio-cells = <2>;
+		gpio-controller;
+		reg = <0>;  /* CS0 */
+		/* chip address (A2:A0) - 0b000 - address is 0, so set bit 0 to 1 */
+		/* chip address (A2:A0) - 0b100 - address is 4, so set bit 4 to 1 */
+		microchip,spi-present-mask = <0x11>; /* 0x01 | 0x10 -> bits 0 and 4 set */
+		spi-max-frequency = <10000000>;
+		#interrupt-cells = <2>;
+	};
 };
 
 &ecspi2 {
