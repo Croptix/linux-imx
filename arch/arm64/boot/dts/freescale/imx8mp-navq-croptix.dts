@@ -57,8 +57,9 @@
 		gpio-controller;
 		reg = <0>;  /* CS0 */
 		/* chip address (A2:A0) - 0b000 - address is 0, so set bit 0 to 1 */
-		/* chip address (A2:A0) - 0b100 - address is 4, so set bit 4 to 1 */
-		microchip,spi-present-mask = <0x11>; /* 0x01 | 0x10 -> bits 0 and 4 set */
+		/* chip address (A2:A0) - 0b001 - address is 1, so set bit 1 to 1 */
+		/* chip address (A2:A0) - 0b010 - address is 2, so set bit 2 to 1 */
+		microchip,spi-present-mask = <0x07>; /* 0b0111 (bits 0-2 set) */
 		spi-max-frequency = <10000000>;
 		#interrupt-cells = <2>;
 	};
