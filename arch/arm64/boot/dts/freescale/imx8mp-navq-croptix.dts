@@ -47,9 +47,9 @@
 	cs-gpios = <&gpio5 9 GPIO_ACTIVE_LOW>;
 	status = "okay";
 
-	/* NB: The mcp23s17 driver doesn't like having two expanders on the same
+	/* NB: The mcp23s17 driver doesn't like having multiple expanders on the same
 		CS line. But the mask can accept multiple chips on one node if we give
-		it two addresses via the address mask.
+		it addresses via the address mask.
 	 */
 	gpiom: gpio@0 {
 		compatible = "microchip,mcp23s17";
@@ -128,32 +128,3 @@
 	};
 };
 
-/ {
-	/* Define LEDs and buttons connected to GPIO expanders */
-	leds {
-		compatible = "gpio-leds";
-		status = "okay";
-		led0 {
-			label = "croptix-led-0";
-			gpios = <&gpiom 9 GPIO_ACTIVE_HIGH>;
-		};
-		led1 {
-			label = "croptix-led-1";
-			gpios = <&gpiom 17 GPIO_ACTIVE_HIGH>;
-		};
-		led2 {
-			label = "croptix-led-2";
-			gpios = <&gpiom 25 GPIO_ACTIVE_HIGH>;
-		};
-	};
-	// gpio_keys {
-	// 	compatible = "gpio-keys";
-	// 	status = "okay";
-
-	// 	button1 {
-	// 		label = "button1";
-	// 		gpios = <&gpiom 1 GPIO_ACTIVE_HIGH>;
-	// 		linux,code = <KEY_ENTER>;
-	// 	};
-	// };
-};
