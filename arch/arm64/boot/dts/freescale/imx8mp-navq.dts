@@ -479,7 +479,7 @@
 		reg = <0x52>;
 		interrupt-parent = <&gpio3>;
 		interrupts = <23 8>;
-		status = "disabled";
+		status = "okay";
 
 		port {
 			typec_dr_sw_port2: endpoint {
@@ -657,11 +657,12 @@
 };
 
 &usb_dwc3_1 {
-	dr_mode = "peripheral";
+	dr_mode = "otg";
 	hnp-disable;
 	srp-disable;
 	adp-disable;
 	usb-role-switch;
+	role-switch-default-mode = "host";
 	status = "okay";
 
 	port {
