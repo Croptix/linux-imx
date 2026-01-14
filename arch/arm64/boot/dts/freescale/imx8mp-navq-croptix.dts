@@ -27,11 +27,6 @@
 	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_80M>;
 	fsl,uart-has-rtscts;
 	status = "okay";
-
-	/*gps1: gps@0 {
-		compatible = "u-blox,neo-m8"
-		frequency = <38400>; // no idea if this is the right property name
-	}*/
 };
 
 /* Enable SPI1 & SPI2 */
