@@ -78,6 +78,11 @@
 
 };
 
+/* Disable onboard wifi */
+&usdhc1 {
+	status = "disabled";
+};
+
 &iomuxc {
 	pinctrl-names = "default";
 
