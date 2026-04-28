@@ -3,13 +3,25 @@
 /*#include "imx8mp-evk.dts"*/
 #include "imx8mp-navq.dts"
 
+/* Add label to PCF2131 RTC on I2C4 */
+&i2c4 {
+	pcf2131_rtc: rtc@53 {
+		/* Not redeclaring any properties, just adding a label */
+	};
+};
+
 / {
 	model = "NXP i.MX8MPlus NAVQ+ board (Croptix prototype)";
 	compatible = "croptix,imx8mp-navq-croptix", "fsl,imx8mp-navq", "fsl,imx8mp";
+
+	aliases {
+		/* Swap RTC0 and RTC1, since RTC1 is the one we want to use as default */
+		rtc0 = &pcf2131_rtc; /* PCF2131 added in NavQ, with our coin battery mod */
+        rtc1 = &snvs_rtc;   /* The internal i.MX8 SNVS RTC (not used) */
+	};
 };
 
 /* Disable UART3 */
-
 &uart3 {
 	status = "disabled";
 };
